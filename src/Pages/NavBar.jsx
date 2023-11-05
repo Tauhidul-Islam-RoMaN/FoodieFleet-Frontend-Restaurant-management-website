@@ -32,7 +32,7 @@ const NavBar = () => {
                 <div className="navbar mx-auto max-w-7xl ">
                     <div className="navbar-start">
                         <Link to='/' className="flex items-center">
-                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FoodieFleet</span>
+                            <span className="self-center text-2xl ml-3 md:ml-10 font-semibold whitespace-nowrap dark:text-white">FoodieFleet</span>
                         </Link>
                     </div>
                     <div className=" hidden md:flex">
@@ -43,7 +43,7 @@ const NavBar = () => {
                     <div className="navbar-end">
                         {user?.photoURL ? 
 
-                            <img className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" src={user.photoURL} alt="" />: ''}
+                            <img className="md:w-24 w-14 mr-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" src={user.photoURL} alt="" />: ''}
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="md:hidden">
                                 <div className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" >
