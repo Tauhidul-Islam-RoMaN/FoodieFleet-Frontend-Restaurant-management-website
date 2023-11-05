@@ -3,27 +3,32 @@ import useAuth from '../Hook/useAuth';
 
 const NavBar = () => {
 
-    const { user } = useAuth()
+    const { user,logOut } = useAuth()
 
     const handleLogout = () => {
+        logOut()
+        .then(res => {
+            console.log(res.user);
+        })
+        .catch(error => {
+            console.log(error);
+        })
 
     }
+    
+
     const navLinks =
         <>
             <li> <NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "btn btn-warning " : ""}>Home</NavLink></li>
             <li> <NavLink to="/allfood" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "btn whitespace-nowrap btn-warning " : ""}>All Food</NavLink></li>
             <li> <NavLink to="/blogs" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "btn btn-warning " : ""}> Blogs</NavLink></li>
-            <li> <NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "btn btn-warning " : ""}>
-                {user ?
-                    <><button onClick={handleLogout} >Logout</button>
-                        <img src={user.photoURL} alt="" /></> :
-                    "Login"} </NavLink></li>
+            <li> <NavLink to="/login" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "btn btn-warning " : ""}>{user ? <button onClick={handleLogout} >Logout</button> :"Login"} </NavLink></li>
         </>
 
 
     return (
         <>
-            <div className='py-2 bg-[#000B33] text-white'>
+            <div className='py-2 bg-[#000B33] border-b-2 border-neutral-200 text-white'>
                 <div className="navbar mx-auto max-w-7xl ">
                     <div className="navbar-start">
                         <Link to='/' className="flex items-center">
@@ -36,6 +41,9 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
+                        {user?.photoURL ? 
+
+                            <img className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2" src={user.photoURL} alt="" />: ''}
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="md:hidden">
                                 <div className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" >
@@ -44,7 +52,7 @@ const NavBar = () => {
                                     </svg>
                                 </div>
                             </label>
-                            <ul tabIndex={0} className=" flex items-center justify-center flex-col gap-1 dropdown-content mt-8 z-0 p-2 shadow bg-base-100 rounded-box w-24">
+                            <ul tabIndex={0} className=" flex items-center justify-center flex-col gap-1 dropdown-content mt-8 z-10 p-4 shadow bg-[#000B33] rounded-box w-24">
                                 {navLinks}
                             </ul>
                         </div>
