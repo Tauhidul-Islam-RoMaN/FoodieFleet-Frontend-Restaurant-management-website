@@ -19,7 +19,14 @@ const Login = () => {
         googleLogin()
         .then(res => {
             console.log(res.user)
+            setSuccessMessage(
+                Swal.fire(
+                    'Good job!',
+                    'Google Login Successful !',
+                    'success'
+                ))
             navigate(location?.state ? location?.state : '/' )
+            return
         })
         .catch(err => console.error(err))
 
@@ -45,6 +52,7 @@ const Login = () => {
                         'Login Successful !',
                         'success'
                     ))
+                    navigate(location?.state ? location?.state : '/' )
                     return
 
 
