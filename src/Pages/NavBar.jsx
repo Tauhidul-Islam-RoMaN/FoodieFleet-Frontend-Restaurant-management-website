@@ -27,7 +27,6 @@ const NavBar = () => {
                 <div className="navbar mx-auto max-w-7xl ">
                     <div className="navbar-start">
                         <Link to='/' className="flex items-center">
-                            <img src='' className="w-20 rounded-full md:hidden mr-3" alt="Photo of RoMaN" />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">FoodieFleet</span>
                         </Link>
                     </div>

@@ -11,7 +11,7 @@ const Footer = () => {
         <footer
             className="bg-[#000B33] text-white lg:text-left">
             <div
-                className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
+                className="flex items-center justify-center border-b-2 border-neutral-200 p-6 lg:justify-between">
                 <div className="mr-12 font-medium text-lg hidden lg:block">
                     <span>Get connected with us on social networks:</span>
                 </div>
