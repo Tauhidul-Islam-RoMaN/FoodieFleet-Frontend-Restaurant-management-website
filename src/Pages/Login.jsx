@@ -12,7 +12,7 @@ const Login = () => {
     const [successMessage, setSuccessMessage] = useState()
     const location = useLocation()
     const navigate =useNavigate()
-    console.log(location,navigate);
+    console.log(location);
 
 
     const handleGoogleLogin=() => {
