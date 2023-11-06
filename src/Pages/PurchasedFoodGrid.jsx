@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import PurchasedFood from "./PurchasedFood";
 
-const PurchasedRoodGrid = () => {
+const PurchasedFoodGrid = () => {
     const purchasedFoods = useLoaderData()
     console.log(purchasedFoods);
     return (
@@ -17,4 +17,4 @@ const PurchasedRoodGrid = () => {
     );
 };
 
-export default PurchasedRoodGrid;
+export default PurchasedFoodGrid;

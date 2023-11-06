@@ -12,7 +12,7 @@ import AddAFood from "../Pages/AddAFood";
 import UpdateAFood from "../Pages/UpdateAFood";
 import SingleFoodCard from "../Pages/SingleFoodCard";
 import AllOrder from "../Pages/AllOrder";
-import PurchasedFood from "../Pages/PurchasedFood";
+// import PurchasedFoodGrid from "../Pages/PurchasedFoodGrid";
 
 const myCreatedRoute = createBrowserRouter([
     {
@@ -32,7 +32,7 @@ const myCreatedRoute = createBrowserRouter([
             },
             {
                 path:'/allFood/:id',
-                element:<SingleFoodCard></SingleFoodCard>,
+                element:<PrivateRoute><SingleFoodCard></SingleFoodCard></PrivateRoute>,
                 loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
 
             },
@@ -50,7 +50,9 @@ const myCreatedRoute = createBrowserRouter([
             },
             {
                 path:'/addedFood',
-                element:<MyAddedFood></MyAddedFood>
+                element:<MyAddedFood></MyAddedFood>,
+                loader: () => fetch('http://localhost:5000/allFood')
+
             },
             {
                 path:'/addAFood',
@@ -65,17 +67,16 @@ const myCreatedRoute = createBrowserRouter([
                 element:<PrivateRoute><AllOrder></AllOrder></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/order')  
             },
-            {
-                path:'/purchase/:id',
-                element:<PrivateRoute><PurchasedFood></PurchasedFood></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/purchase/${params.id}`)  
-            },
-            {
-                path:'/purchase',
-                element:<PurchasedFood></PurchasedFood>,
-                loader: () => fetch('http://localhost:5000/purchase')
-
-            },
+            // {
+            //     path:'/purchase/:id',
+            //     element:<PrivateRoute><PurchasedFood></PurchasedFood></PrivateRoute>,
+            //     loader: ({params}) => fetch(`http://localhost:5000/purchase/${params.id}`)  
+            // },
+            // {
+            //     path:'/purchase',
+            //     element:<PurchasedFoodGrid></PurchasedFoodGrid>,
+            //     loader: () => fetch('http://localhost:5000/purchase')
+            // },
         ]
     },
 ])

@@ -28,13 +28,15 @@ const SingleFoodCard = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if (data.acknowledged) {
-                    Swal.fire(
-                        'Good job!',
-                        'This Food is Added to your Order List!',
-                        'success'
-                    )
-                    // window.location.reload()
+                if (user) {
+                    if (data.acknowledged) {
+                        Swal.fire(
+                            'Good job!',
+                            'This Food is Added to your Order List!',
+                            'success'
+                        )
+                        // window.location.reload()
+                    }
                 }
             });
     }

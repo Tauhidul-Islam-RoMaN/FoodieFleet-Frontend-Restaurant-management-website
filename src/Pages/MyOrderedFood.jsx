@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const MyOrderedFood = ({ myOrder }) => {
-    const { foodName, image, quantity, price, _id, orderedTime } = myOrder
+    const { foodName, image, quantity, price, orderedTime,category,email,name,description,orderedBy } = myOrder
     const { user } = useAuth()
     console.log(myOrder);
     const timeElapsed = Date.now();
     const purchasedTime = new Date(timeElapsed).toUTCString();
-    const purchasedOrder = {...myOrder ,purchasedTime }
+    const purchasedOrder = {name, email, foodName, image, category, quantity, origin, price, description, orderedBy,orderedTime ,purchasedTime }
     console.log(purchasedOrder);
     
 
@@ -52,7 +52,7 @@ const MyOrderedFood = ({ myOrder }) => {
                     <p className="mb-3 text-gray-700 dark:text-gray-400"> <span className='font-bold'>  Email: </span>{user?.email} </p>
                 </div>
             </div>
-            <Link to={`/purchase/${_id}`} > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' onClick={handlePurchase} >Purchase</button> </Link>
+            <Link > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' onClick={handlePurchase} >Purchase</button> </Link>
         </div>
 
     );
