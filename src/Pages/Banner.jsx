@@ -10,7 +10,7 @@ const Banner = () => {
                 <div className="col-start-1 flex items-center flex-col justify-center row-start-1 mx-auto">
                     <h2 className="lg:text-5xl md:text-4xl text-lg mb-2 md:mb-6">Embark on a Culinary Voyage at FoodieFleet</h2>
                     <p className="text-sm mb-2 lg:mx-24 md:mb-6 mx-3">An extraordinary culinary journey with diverse global dishes, expert chefs, and warm hospitality. Join us to explore a world of flavors and savor every bite.</p>
-                    <Link to='/'><button className="btn btn-warning">Menu</button></Link>
+                    <Link to='/allFood'><button className="btn btn-warning">Menu</button></Link>
                 </div>
             </div>
         </div>

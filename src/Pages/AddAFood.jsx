@@ -38,7 +38,7 @@ const AddAFood = () => {
         console.log(newFood);
 
         
-        fetch("http://localhost:5000/addFood", {
+        fetch("http://localhost:5000/allFood", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

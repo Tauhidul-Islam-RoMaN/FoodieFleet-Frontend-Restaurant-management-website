@@ -21,11 +21,12 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>,
-                loader: () => fetch('http://localhost:5000/addFood')
             },
             {
                 path:'/allFood',
-                element:<AllFood></AllFood>
+                element:<AllFood></AllFood>,
+                loader: () => fetch('http://localhost:5000/allFood')
+
             },
             {
                 path:'/blogs',
