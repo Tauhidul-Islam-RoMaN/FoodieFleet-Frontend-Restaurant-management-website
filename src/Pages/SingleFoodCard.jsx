@@ -7,9 +7,15 @@ const SingleFoodCard = () => {
     const { user } = useAuth()
     const { name, email, foodName, image, category, quantity, origin, price, description } = singleFood
     console.log(singleFood);
+    const timeElapsed = Date.now();
+    const orderedTime = new Date(timeElapsed).toUTCString();
+    console.log(orderedTime);
     const orderedBy = user?.email
-    const orderedFood = { name, email, foodName, image, category, quantity, origin, price, description, orderedBy }
+    const orderedFood = { name, email, foodName, image, category, quantity, origin, price, description, orderedBy,orderedTime }
     console.log(orderedFood);
+
+
+
 
     const handleOrder = () => {
         fetch("http://localhost:5000/order", {
@@ -28,6 +34,7 @@ const SingleFoodCard = () => {
                         'This Food is Added to your Order List!',
                         'success'
                     )
+                    // window.location.reload()
                 }
             });
     }
