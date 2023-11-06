@@ -21,7 +21,8 @@ const Register = () => {
         const password = form.password.value
         const name = form.name.value
         const photo = form.photo.value
-        console.log(email, password, name, photo);
+        const newUser = {email,password,name,photo}
+        console.log(newUser);
 
         if (password.length < 6) {
             return setErrorMessage('Provide at least 6 character')
@@ -33,6 +34,18 @@ const Register = () => {
         if (!/[\W_]/.test(password)) {
             return setErrorMessage("Provide at least one Special Character")
         }
+
+        fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+            });      
 
 
         createUser(email, password)

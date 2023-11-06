@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyAddedFood from "../Pages/MyAddedFood";
 import MyOrderedFood from "../Pages/MyOrderedFood";
 import AddAFood from "../Pages/AddAFood";
+import UpdateAFood from "../Pages/UpdateAFood";
 
 const myCreatedRoute = createBrowserRouter([
     {
@@ -19,7 +20,8 @@ const myCreatedRoute = createBrowserRouter([
         children: [
             {
                 path:'/',
-                element:<Home></Home>
+                element:<Home></Home>,
+                loader: () => fetch('http://localhost:5000/addFood')
             },
             {
                 path:'/allFood',
@@ -44,6 +46,10 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/addAFood',
                 element:<AddAFood></AddAFood>
+            },
+            {
+                path:'/updateFood',
+                element:<UpdateAFood></UpdateAFood>
             },
             {
                 path:'/orderedFood',
