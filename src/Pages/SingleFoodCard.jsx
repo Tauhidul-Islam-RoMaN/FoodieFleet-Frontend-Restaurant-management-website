@@ -1,9 +1,36 @@
 import { Link, useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import useAuth from "../Hook/useAuth";
 
 const SingleFoodCard = () => {
     const singleFood = useLoaderData()
+    const { user } = useAuth()
     const { name, email, foodName, image, category, quantity, origin, price, description } = singleFood
     console.log(singleFood);
+    const orderedBy = user?.email
+    const orderedFood = { name, email, foodName, image, category, quantity, origin, price, description, orderedBy }
+    console.log(orderedFood);
+
+    const handleOrder = () => {
+        fetch("http://localhost:5000/order", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(orderedFood),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                if (data.acknowledged) {
+                    Swal.fire(
+                        'Good job!',
+                        'This Food is Added to your Order List!',
+                        'success'
+                    )
+                }
+            });
+    }
     return (
         <div className="bg-[#000B33] py-10">
             <div className="max-w-3xl lg:mx-auto md:mx-6 mx-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -26,7 +53,7 @@ const SingleFoodCard = () => {
                     </div>
                 </div>
                 <p className="mb-3 px-5 -pt-5 text-gray-700 dark:text-gray-400"> <span className='font-bold'>Description: </span>{description} </p>
-                <Link > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' >Order Now</button> </Link>
+                <Link to='/orderedFood' > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' onClick={handleOrder}  >Order Now</button> </Link>
 
             </div>
         </div>
