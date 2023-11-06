@@ -55,7 +55,7 @@ const Footer = () => {
                         </p>
                         <p>
                             <Link to='' className="text-white hover:text-blue-700 hover:underline"
-                            >Help</Link>
+                            >Menu</Link>
                         </p>
                     </div>
                     <div className="">
