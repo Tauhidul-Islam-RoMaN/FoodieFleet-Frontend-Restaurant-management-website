@@ -24,7 +24,7 @@ const AllFoodCard = ({ food }) => {
 };
 
 AllFoodCard.propTypes = {
-    food: PropTypes.string
+    food: PropTypes.object
 };
 
 export default AllFoodCard;
