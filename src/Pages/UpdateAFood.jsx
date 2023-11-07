@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import { useLoaderData, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const UpdateAFood = () => {
     const { user } = useAuth()
@@ -22,7 +23,7 @@ const UpdateAFood = () => {
         const price = parseInt(form.price.value).toFixed(2)
         const description = form.description.value
 
-        const updatedFood = {email, name, foodName, image, category, quantity, origin, price, description};
+        const updatedFood = { email, name, foodName, image, category, quantity, origin, price, description };
         console.log(updatedFood);
 
         fetch(`http://localhost:5000/update/${id}`, {
@@ -50,6 +51,11 @@ const UpdateAFood = () => {
     }
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Update Food
+                </title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-4xl shadow-2xl bg-base-100">
                     <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Update Food</h2>

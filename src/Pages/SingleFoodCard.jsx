@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 // import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const SingleFoodCard = () => {
     const singleFood = useLoaderData()
@@ -11,7 +12,7 @@ const SingleFoodCard = () => {
     const orderedTime = new Date(timeElapsed).toUTCString();
     console.log(orderedTime);
     const orderedBy = user?.email
-    const orderedFood = { name, email, foodName, image, category, quantity, origin, price, description, orderedBy,orderedTime }
+    const orderedFood = { name, email, foodName, image, category, quantity, origin, price, description, orderedBy, orderedTime }
     console.log(orderedFood);
 
 
@@ -42,6 +43,11 @@ const SingleFoodCard = () => {
     }
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Food Details
+                </title>
+            </Helmet>
             <div className="max-w-3xl lg:mx-auto md:mx-6 mx-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 <img className="rounded-t-lg mx-auto " src={image} alt="" />
                 <h5 className="mb-2 px-5 pt-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Food Name: {foodName} </h5>

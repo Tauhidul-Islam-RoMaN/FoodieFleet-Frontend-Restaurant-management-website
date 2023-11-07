@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import AllFoodCard from "./AllFoodCard";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AllFood = () => {
     const allFoods = useLoaderData()
@@ -30,38 +31,43 @@ const AllFood = () => {
 
     return (
         <div className="bg-[#000B33]">
+            <Helmet>
+                <title>
+                    FoodieFleet | AllFood
+                </title>
+            </Helmet>
             <div className=" max-w-7xl mx-4 md:mx-10">
-                <div  className="flex items-center gap-2 pt-10 justify-end">
+                <div className="flex items-center gap-2 pt-10 justify-end">
                     <div className="form-control">
-                        <input type="text" 
-                        name="search" 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search By Food Name" 
-                        className="input input-bordered max-w-md" />
+                        <input type="text"
+                            name="search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search By Food Name"
+                            className="input input-bordered max-w-md" />
                     </div>
                     {/* <div className="form-control">
                         <button className="btn btn-warning">Search</button>
                     </div> */}
                 </div>
                 <div>
-                {searchResults.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-                        {
-                            searchResults.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
-                        }
-                    </div>
+                    {searchResults.length > 0 ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
+                            {
+                                searchResults.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
+                            }
+                        </div>
 
-                ) : searchQuery ? (
-                    <p className="text-center flex justify-center items-center text-3xl">No data found</p>
-                ) :
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-                        {
-                            allFoods.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
-                        }
-                    </div>
-                }
-            </div>
+                    ) : searchQuery ? (
+                        <p className="text-center flex justify-center items-center text-3xl">No data found</p>
+                    ) :
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
+                            {
+                                allFoods.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
+                            }
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     );

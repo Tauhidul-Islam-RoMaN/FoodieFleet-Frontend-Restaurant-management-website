@@ -1,7 +1,13 @@
+import { Helmet } from "react-helmet-async";
 
 const Blogs = () => {
     return (
         <div className="bg-[#000B33]   text-white">
+            <Helmet>
+                <title>
+                    FoodieFleet | Blogs
+                </title>
+            </Helmet>
             <div className="max-w-6xl space-y-10 py-10 mx-auto">
                 <div className="space-y-6 mx-6 text-justify">
                     <h3 className="text-3xl font-bold">What is One way data binding?</h3>

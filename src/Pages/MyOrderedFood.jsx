@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import useAuth from '../Hook/useAuth';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 // import Swal from 'sweetalert2';
 
-const MyOrderedFood = ({ myOrder, setMyOrder,myOrders }) => {
+const MyOrderedFood = ({ myOrder, setMyOrder, myOrders }) => {
     const { foodName, image, quantity, price, orderedTime, _id } = myOrder
     const { user } = useAuth()
     console.log(myOrder);
@@ -22,7 +23,7 @@ const MyOrderedFood = ({ myOrder, setMyOrder,myOrders }) => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if (data.deletedCount>0) {
+                if (data.deletedCount > 0) {
                     Swal.fire(
                         'Good job!',
                         'This Food is removed from your ordered List!',
@@ -34,10 +35,15 @@ const MyOrderedFood = ({ myOrder, setMyOrder,myOrders }) => {
                 setMyOrder(remaining)
                 console.log(remaining);
             });
-        }
+    }
 
     return (
         <div className="max-w-lg bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <Helmet>
+                <title>
+                    FoodieFleet | OrderedFood
+                </title>
+            </Helmet>
             <img className="rounded-t-lg w-full h-[350px]" src={image} alt="" />
             <h5 className="mb-2 px-5 pt-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"> Food Name: {foodName} </h5>
             <div className="px-5 pt-5 flex flex-col md:flex-row ">

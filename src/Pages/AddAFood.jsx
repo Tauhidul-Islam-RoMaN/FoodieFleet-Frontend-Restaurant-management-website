@@ -1,22 +1,10 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
-// import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AddAFood = () => {
 
-    // const countries =[{"origin": "Italy"}, {"origin": "France"}, {"origin": "India"}, {"origin": "China"}, {"origin": "Japan"}, {"origin": "Mexico"}, {"origin": "Thailand"}, {"origin": "Greece"}, {"origin": "Spain"}, {"origin": "Turkey"}, {"origin": "Vietnam"}, {"origin": "Morocco"}, {"origin": "Lebanon"}, {"origin": "South Korea"}, {"origin": "Argentina"}, {"origin": "Peru"}, {"origin": "Brazil"}, {"origin": "Palestine"}, {"origin": "Iran"}, {"origin": "Malaysia"}, {"origin": "Ethiopia"}, {"origin": "Egypt"}, {"origin": "Indonesia"}, {"origin": "Russia"}, {"origin": "Portugal"}, {"origin": "Tunisia"}, {"origin": "Bangladesh"}]
-    // console.log(countries);
-
     const { user } = useAuth()
-    // const [category, setCategory] = useState()
-    // const [country, setCountry] = useState()
-
-    // const handleCategory = (e) => {
-    //     setCategory(e.target.value)
-    // }
-    // const handleOrigin = (e) => {
-    //     setCountry(e.target.value)
-    // }
 
     const handleAddFood = (e) => {
         e.preventDefault()
@@ -34,10 +22,10 @@ const AddAFood = () => {
         const price = form.price.value
         const description = form.description.value
 
-        const newFood = {email, name, foodName, image, category, quantity, origin, price, description};
+        const newFood = { email, name, foodName, image, category, quantity, origin, price, description };
         console.log(newFood);
 
-        
+
         fetch("http://localhost:5000/allFood", {
             method: "POST",
             headers: {
@@ -55,15 +43,18 @@ const AddAFood = () => {
                         'success'
                     )
                 }
-                
                 form.reset()
-                // setCategory('')
-                // setCountry('')
-            });      
+            });
 
     }
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Add Food
+                </title>
+            </Helmet>
+
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-4xl shadow-2xl bg-base-100">
                     <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Add a Food</h2>

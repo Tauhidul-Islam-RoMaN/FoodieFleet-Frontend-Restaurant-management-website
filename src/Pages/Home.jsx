@@ -1,4 +1,6 @@
 import { Link, useLoaderData } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
+
 import Banner from "./Banner";
 import TopFood from "./TopFood";
 import { useEffect, useState } from "react";
@@ -27,6 +29,11 @@ const Home = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>
+                    FoodieFleet | Home
+                </title>
+            </Helmet>
             <Banner></Banner>
             <div className=" bg-[#000B33]">
                 <div className="max-w-7xl mx-4 pb-4 lg:mx-24">

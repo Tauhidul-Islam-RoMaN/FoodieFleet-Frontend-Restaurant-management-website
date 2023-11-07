@@ -3,36 +3,37 @@ import useAuth from "../Hook/useAuth";
 import Swal from 'sweetalert2'
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
 
-    const { login,googleLogin } = useAuth()
+    const { login, googleLogin } = useAuth()
     const [errorMessage, setErrorMessage] = useState()
     const [successMessage, setSuccessMessage] = useState()
     const location = useLocation()
-    const navigate =useNavigate()
+    const navigate = useNavigate()
     console.log(location);
 
 
-    const handleGoogleLogin=() => {
+    const handleGoogleLogin = () => {
         googleLogin()
-        .then(res => {
-            console.log(res.user)
-            setSuccessMessage(
-                Swal.fire(
-                    'Good job!',
-                    'Google Login Successful !',
-                    'success'
-                ))
-            navigate(location?.state ? location?.state : '/' )
-            return
-        })
-        .catch(err => console.error(err))
+            .then(res => {
+                console.log(res.user)
+                setSuccessMessage(
+                    Swal.fire(
+                        'Good job!',
+                        'Google Login Successful !',
+                        'success'
+                    ))
+                navigate(location?.state ? location?.state : '/')
+                return
+            })
+            .catch(err => console.error(err))
 
     }
     const handleLogin = (e) => {
-        
+
         setErrorMessage("")
         setSuccessMessage("")
         e.preventDefault()
@@ -52,8 +53,8 @@ const Login = () => {
                         'Login Successful !',
                         'success'
                     ))
-                    navigate(location?.state ? location?.state : '/' )
-                    return
+                navigate(location?.state ? location?.state : '/')
+                return
 
 
             })
@@ -65,6 +66,11 @@ const Login = () => {
 
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Login
+                </title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Login !</h2>

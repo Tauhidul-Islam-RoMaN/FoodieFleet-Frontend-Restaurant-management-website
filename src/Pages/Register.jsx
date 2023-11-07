@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
 
@@ -21,7 +22,7 @@ const Register = () => {
         const password = form.password.value
         const name = form.name.value
         const photo = form.photo.value
-        const newUser = {email,password,name,photo}
+        const newUser = { email, password, name, photo }
         console.log(newUser);
 
         if (password.length < 6) {
@@ -45,7 +46,7 @@ const Register = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-            });      
+            });
 
 
         createUser(email, password)
@@ -65,14 +66,14 @@ const Register = () => {
                 logOut()
                     .then(res => res.user)
                     .catch(error => console.error(error))
-                    setSuccessMessage(
-                        Swal.fire(
-                            'Good job!',
-                            'User Created successfully!',
-                            'success'
-                        ))
-                    navigate('/login')
-                    return
+                setSuccessMessage(
+                    Swal.fire(
+                        'Good job!',
+                        'User Created successfully!',
+                        'success'
+                    ))
+                navigate('/login')
+                return
             })
             .catch(error => {
                 console.log(error);
@@ -85,6 +86,11 @@ const Register = () => {
     }
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Register
+                </title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Register !</h2>

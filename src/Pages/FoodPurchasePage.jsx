@@ -1,11 +1,12 @@
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../Hook/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const FoodPurchasePage = () => {
     const { user } = useAuth()
     const purchase = useLoaderData()
-    const { foodName, category, price,email, name, image } = purchase
+    const { foodName, category, price, email, name, image } = purchase
     console.log(purchase);
     const timeElapsed = Date.now();
     const orderedTime = new Date(timeElapsed).toUTCString();
@@ -26,7 +27,7 @@ const FoodPurchasePage = () => {
         const name = form.name.value
         const email = form.email.value
 
-        const purchasedFood = {email, name, foodName,buyerEmail,buyerName, orderedTime, image, category, quantity, price, };
+        const purchasedFood = { email, name, foodName, buyerEmail, buyerName, orderedTime, image, category, quantity, price, };
         console.log(purchasedFood);
 
 
@@ -40,12 +41,12 @@ const FoodPurchasePage = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                    if (data.acknowledged) {
-                        Swal.fire(
-                            'Good job!',
-                            'Purchased Confirm',
-                            'success'
-                        )
+                if (data.acknowledged) {
+                    Swal.fire(
+                        'Good job!',
+                        'Purchased Confirm',
+                        'success'
+                    )
                 }
             });
 
@@ -53,6 +54,11 @@ const FoodPurchasePage = () => {
 
     return (
         <div className="bg-[#000B33] py-10">
+            <Helmet>
+                <title>
+                    FoodieFleet | Food Purchase
+                </title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="card flex-shrink-0 w-full max-w-4xl shadow-2xl bg-base-100">
                     <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Purchase Food</h2>
