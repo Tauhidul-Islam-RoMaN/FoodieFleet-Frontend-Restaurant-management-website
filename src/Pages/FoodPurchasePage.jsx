@@ -23,11 +23,10 @@ const FoodPurchasePage = () => {
         const buyerName = user?.displayName
         const category = form.category.value
         const image = form.image.value
-        const origin = form.origin.value
         const name = form.name.value
         const email = form.email.value
 
-        const purchasedFood = {email, name, foodName,buyerEmail,buyerName, image, category, quantity, origin, price, };
+        const purchasedFood = {email, name, foodName,buyerEmail,buyerName, orderedTime, image, category, quantity, price, };
         console.log(purchasedFood);
 
 
@@ -47,7 +46,6 @@ const FoodPurchasePage = () => {
                             'Purchased Confirm',
                             'success'
                         )
-                        // window.location.reload()
                 }
             });
 
@@ -98,7 +96,7 @@ const FoodPurchasePage = () => {
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Buying Date</span>
                                 </label>
-                                <input type="text" name="origin" placeholder="Food Origin"
+                                <input type="text" name="orderedTime" placeholder="Buying Date"
                                     defaultValue={orderedTime}
                                     className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
