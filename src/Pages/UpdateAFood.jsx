@@ -1,23 +1,13 @@
 import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
-import { useState } from "react";
+import { useLoaderData, useParams } from "react-router-dom";
 
 const UpdateAFood = () => {
-
-
-    // const countries =[{"origin": "Italy"}, {"origin": "France"}, {"origin": "India"}, {"origin": "China"}, {"origin": "Japan"}, {"origin": "Mexico"}, {"origin": "Thailand"}, {"origin": "Greece"}, {"origin": "Spain"}, {"origin": "Turkey"}, {"origin": "Vietnam"}, {"origin": "Morocco"}, {"origin": "Lebanon"}, {"origin": "South Korea"}, {"origin": "Argentina"}, {"origin": "Peru"}, {"origin": "Brazil"}, {"origin": "Palestine"}, {"origin": "Iran"}, {"origin": "Malaysia"}, {"origin": "Ethiopia"}, {"origin": "Egypt"}, {"origin": "Indonesia"}, {"origin": "Russia"}, {"origin": "Portugal"}, {"origin": "Tunisia"}, {"origin": "Bangladesh"}]
-    // console.log(countries);
-
     const { user } = useAuth()
-    const [category, setCategory] = useState()
-    // const [country, setCountry] = useState()
-
-    const handleCategory = (e) => {
-        setCategory(e.target.value)
-    }
-    // const handleOrigin = (e) => {
-    //     setCountry(e.target.value)
-    // }
+    const { id } = useParams()
+    console.log(id);
+    const updatedData = useLoaderData()
+    const { foodName, image, category, quantity, origin, price, description } = updatedData
 
     const handleUpdateFood = (e) => {
         e.preventDefault()
@@ -27,26 +17,37 @@ const UpdateAFood = () => {
         const name = user?.displayName
         const foodName = form.foodName.value
         const image = form.image.value
-        const category1 = category
-        const quantity = form.quantity.value
+        const category = form.category.value
+        const quantity = parseInt(form.quantity.value)
         const origin = form.origin.value
-        // const origin = country
-        const price = form.price.value
+        const price = parseInt(form.price.value).toFixed(2)
         const description = form.description.value
 
-        const newFood = (email, name, foodName, image, category1, quantity, origin, price, description);
-        console.log(newFood);
+        const updatedFood = {email, name, foodName, image, category, quantity, origin, price, description};
+        console.log(updatedFood);
+
+        fetch(`http://localhost:5000/update/${id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(updatedFood)
+
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    Swal.fire(
+                        'Good job!',
+                        'You Food is Updated!',
+                        'success'
+                    )
+                }
+            })
 
 
-
-        Swal.fire(
-            'Good job!',
-            'You Food is Updated!',
-            'success'
-        )
         form.reset()
-        setCategory('')
-        // setCountry('')
     }
     return (
         <div className="bg-[#000B33] py-10">
@@ -59,36 +60,35 @@ const UpdateAFood = () => {
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Food Name</span>
                                 </label>
-                                <input type="text" name="foodName" placeholder="Food Name" defaultValue={foodName} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                <input type="text" name="foodName" placeholder="Food Name"
+                                    defaultValue={foodName}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                             <div className="form-control flex-1">
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Food Image</span>
                                 </label>
-                                <input type="text" name="image" placeholder="Food Image" defaultValue={image} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                <input type="text" name="image" placeholder="Food Image"
+                                    defaultValue={image}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                         </div>
                         <div className="flex gap-5 items-center">
                             <div className="form-control flex-1">
-                                {/* <label className="label">
-                                    <span className="label-text text-black font-medium">Food Category</span>
-                                </label>
-                                <input type="text" name="category" placeholder="Food Category" className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required /> */}
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Food Category</span>
                                 </label>
-                                <select name="" value={category} onChange={handleCategory} defaultValue={value} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none">
-                                    <option value="">Select An Option</option>
-                                    <option value="Thai">Thai</option>
-                                    <option value="Indian">Indian</option>
-                                    <option value="Chinese">Chinese</option>
-                                </select>
+                                <input type="text" name="category" placeholder="Food Category"
+                                    defaultValue={category}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                             <div className="form-control flex-1">
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Quantity</span>
                                 </label>
-                                <input type="number" name="quantity" placeholder="Quantity" defaultValue={quantity} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                <input type="number" name="quantity" placeholder="Quantity"
+                                    defaultValue={quantity}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                         </div>
                         <div className="flex gap-5 items-center">
@@ -96,18 +96,17 @@ const UpdateAFood = () => {
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Food Origin(Country)</span>
                                 </label>
-                                <input type="text" name="origin" placeholder="Food Origin" defaultValue={origin} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
-                                {/* <select name="" value={country} onChange={handleOrigin} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none">
-                                    <option value="">Select Country</option>
-                                    {countries.map(country,index => <option key={index}> </option>)}
-            
-                                </select> */}
+                                <input type="text" name="origin" placeholder="Food Origin"
+                                    defaultValue={origin}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                             <div className="form-control flex-1">
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Price</span>
                                 </label>
-                                <input type="number" name="price" placeholder="Price" defaultValue={price} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                <input type="number" name="price" placeholder="Price"
+                                    defaultValue={price}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                         </div>
                         <div className="flex gap-5 items-center">
@@ -129,8 +128,9 @@ const UpdateAFood = () => {
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Description</span>
                                 </label>
-                                {/* <input type="text" name="description" placeholder="description" className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required /> */}
-                                <textarea name="description" defaultValue={description} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" cols="30" rows="2" placeholder="Short description" required></textarea>
+                                <textarea name="description"
+                                    defaultValue={description}
+                                    className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" cols="30" rows="2" placeholder="Short description" required></textarea>
                             </div>
                         </div>
                         <div className="form-control mt-6">

@@ -1,11 +1,11 @@
 import { Link, useLoaderData } from "react-router-dom";
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 
 const SingleFoodCard = () => {
     const singleFood = useLoaderData()
     const { user } = useAuth()
-    const { name, email, foodName, image, category, quantity, origin, price, description } = singleFood
+    const { name, email, foodName, image, category, quantity, origin, price, _id, description } = singleFood
     console.log(singleFood);
     const timeElapsed = Date.now();
     const orderedTime = new Date(timeElapsed).toUTCString();
@@ -28,16 +28,16 @@ const SingleFoodCard = () => {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                if (user) {
-                    if (data.acknowledged) {
-                        Swal.fire(
-                            'Good job!',
-                            'This Food is Added to your Order List!',
-                            'success'
-                        )
-                        // window.location.reload()
-                    }
-                }
+                // if (user) {
+                //     if (data.acknowledged) {
+                //         Swal.fire(
+                //             'Good job!',
+                //             'This Food is Added to your Order List!',
+                //             'success'
+                //         )
+                //         // window.location.reload()
+                //     }
+                // }
             });
     }
     return (
@@ -62,7 +62,7 @@ const SingleFoodCard = () => {
                     </div>
                 </div>
                 <p className="mb-3 px-5 -pt-5 text-gray-700 dark:text-gray-400"> <span className='font-bold'>Description: </span>{description} </p>
-                <Link to='/orderedFood' > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' onClick={handleOrder}  >Order Now</button> </Link>
+                <Link to={`/purchase/${_id}`} > <button className='btn flex justify-center mb-5 w-3/4 mx-auto items-center btn-warning' onClick={handleOrder}  >Order Now</button> </Link>
 
             </div>
         </div>

@@ -12,6 +12,7 @@ import AddAFood from "../Pages/AddAFood";
 import UpdateAFood from "../Pages/UpdateAFood";
 import SingleFoodCard from "../Pages/SingleFoodCard";
 import AllOrder from "../Pages/AllOrder";
+import FoodPurchasePage from "../Pages/FoodPurchasePage";
 // import PurchasedFoodGrid from "../Pages/PurchasedFoodGrid";
 
 const myCreatedRoute = createBrowserRouter([
@@ -38,7 +39,7 @@ const myCreatedRoute = createBrowserRouter([
             },
             {
                 path:'/blogs',
-                element:<PrivateRoute><Blogs></Blogs></PrivateRoute>
+                element:<Blogs></Blogs>
             },
             {
                 path:'/login',
@@ -59,24 +60,21 @@ const myCreatedRoute = createBrowserRouter([
                 element:<AddAFood></AddAFood>
             },
             {
-                path:'/updateFood',
-                element:<UpdateAFood></UpdateAFood>
+                path:'/purchase/:id',
+                element:<PrivateRoute><FoodPurchasePage></FoodPurchasePage></PrivateRoute>,
+                loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
             },
             {
                 path:'/orderedFood',
                 element:<PrivateRoute><AllOrder></AllOrder></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/order')  
+                loader: () => fetch('http://localhost:5000/purchase')  
             },
-            // {
-            //     path:'/purchase/:id',
-            //     element:<PrivateRoute><PurchasedFood></PurchasedFood></PrivateRoute>,
-            //     loader: ({params}) => fetch(`http://localhost:5000/purchase/${params.id}`)  
-            // },
-            // {
-            //     path:'/purchase',
-            //     element:<PurchasedFoodGrid></PurchasedFoodGrid>,
-            //     loader: () => fetch('http://localhost:5000/purchase')
-            // },
+            {
+                path:'/updateFood/:id',
+                element:<UpdateAFood></UpdateAFood>,
+                loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
+            },
+
         ]
     },
 ])

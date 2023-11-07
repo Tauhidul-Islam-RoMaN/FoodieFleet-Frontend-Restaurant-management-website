@@ -8,8 +8,7 @@ import { FiHome } from 'react-icons/fi';
 const Footer = () => {
     return (
         // < !--Footer container-- >
-        <footer
-            className="bg-[#000B33] text-white lg:text-left">
+        <footer className="bg-[#000B33] text-white lg:text-left ">
             <div
                 className="flex items-center justify-center border-t-2 border-neutral-200 p-6 lg:justify-between">
                 <div className="mr-12 font-medium text-lg hidden lg:block">
