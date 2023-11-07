@@ -11,7 +11,6 @@ const UpdateAFood = () => {
 
     const handleUpdateFood = (e) => {
         e.preventDefault()
-
         const form = e.target
         const email = user?.email
         const name = user?.displayName

@@ -1,14 +1,8 @@
-import { useLoaderData } from "react-router-dom";
-import AllFoodCard from "./AllFoodCard";
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const AllFood = () => {
-    const allFoods = useLoaderData()
-    console.log(allFoods);
-
+const Search = ({ data }) => {
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
-    console.log(searchResults);
 
     useEffect(() => {
         if (searchQuery) {
@@ -22,29 +16,16 @@ const AllFood = () => {
         }
     }, [searchQuery]);
 
-    // const handleSearch = (e) => {
-    //     e.preventDefault()
-    //     const search = e.target.search.value
-    //     console.log(search);
-    // }
-
     return (
-        <div className="bg-[#000B33]">
-            <div className=" max-w-7xl mx-4 md:mx-10">
-                <div  className="flex items-center gap-2 pt-10 justify-end">
-                    <div className="form-control">
-                        <input type="text" 
-                        name="search" 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search By Food Name" 
-                        className="input input-bordered max-w-md" />
-                    </div>
-                    {/* <div className="form-control">
-                        <button className="btn btn-warning">Search</button>
-                    </div> */}
-                </div>
-                <div>
+        <div>
+            <input
+                type="text"
+                placeholder="Search by food name..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            />
+            <div>
                 {searchResults.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
                         {
@@ -62,9 +43,33 @@ const AllFood = () => {
                     </div>
                 }
             </div>
-            </div>
         </div>
     );
 };
 
-export default AllFood;
+export default Search;
+import React, { useEffect, useState } from "react";
+import Search from "./Search";
+
+function App() {
+    const [foodData, setFoodData] = useState([]);
+
+    useEffect(() => {
+        // Load your food data from the MongoDB backend
+        // Replace this with your actual API endpoint
+        fetch("/api/foods")
+            .then((response) => response.json())
+            .then((data) => setFoodData(data))
+            .catch((error) => console.error(error));
+    }, []);
+
+    return (
+        <div className="p-4">
+            <h1 className="text-2xl font-bold">Restaurant Website</h1>
+            <Search data={foodData} />
+            {/* Other components and content here */}
+        </div>
+    );
+}
+
+export default App;
