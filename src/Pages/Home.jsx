@@ -49,7 +49,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="max-w-7xl mx-4 pb-10 lg:mx-36">
-                    <h2 className="text-5xl font-bold text-center mb-5 text-[#FAA916] py-20">Our Location</h2>
+                    <h2 className="text-5xl font-bold text-center mb-5 text-[#FAA916] py-10">Our Location</h2>
                 </div>
                 <SimpleMapPage></SimpleMapPage>
             </div>
