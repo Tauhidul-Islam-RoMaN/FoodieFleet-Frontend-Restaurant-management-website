@@ -10,6 +10,9 @@ const UpdateAFood = () => {
     const updatedData = useLoaderData()
     const { foodName, image, category, quantity, origin, price, description } = updatedData
 
+
+
+
     const handleUpdateFood = (e) => {
         e.preventDefault()
         const form = e.target
@@ -25,6 +28,7 @@ const UpdateAFood = () => {
 
         const updatedFood = { email, name, foodName, image, category, quantity, origin, price, description };
         console.log(updatedFood);
+        
 
         fetch(`https://assignment-11-server-eight-iota.vercel.app/update/${id}`, {
             method: 'PUT',
@@ -91,7 +95,7 @@ const UpdateAFood = () => {
                                 <label className="label">
                                     <span className="label-text text-black font-medium">Quantity</span>
                                 </label>
-                                <input type="number" name="quantity" placeholder="Quantity"
+                                <input type="number" min={0} name="quantity" placeholder="Quantity"
                                     defaultValue={quantity}
                                     className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>

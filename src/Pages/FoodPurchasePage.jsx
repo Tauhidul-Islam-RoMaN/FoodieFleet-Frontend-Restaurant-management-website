@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet-async";
 const FoodPurchasePage = () => {
     const { user } = useAuth()
     const purchase = useLoaderData()
-    const { foodName, category, price, email, name, image } = purchase
+    const { foodName, category, price, email, name, quantity, image } = purchase
     console.log(purchase);
     const timeElapsed = Date.now();
     const orderedTime = new Date(timeElapsed).toUTCString();
@@ -20,8 +20,8 @@ const FoodPurchasePage = () => {
 
 
         const foodName = form.foodName.value
-        const price = form.price.value
-        const quantity = form.quantity.value
+        const price = parseInt(form.price.value).toFixed(2)
+        const quantity = parseInt(form.quantity.value)
         const buyerEmail = user?.email
         const buyerName = user?.displayName
         const category = form.category.value
@@ -72,100 +72,106 @@ const FoodPurchasePage = () => {
             </Helmet>
 
             {
-                email === user?.email ?
+                quantity == 0 ?
                     <div>
                         <h2 className="text-center font-bold text-3xl text-white py-10">You can not purchase your own added food</h2>
                     </div> :
-                    <div className="hero-content flex-col lg:flex-row-reverse">
-                        <div className="card flex-shrink-0 w-full max-w-4xl shadow-2xl bg-base-100">
-                            <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Purchase Food</h2>
-                            <form onSubmit={handlePurchasedFood} className="card-body bg-white rounded-lg">
-                                <div className="flex gap-5 items-center">
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Food Name</span>
-                                        </label>
-                                        <input type="text" name="foodName" placeholder="Food Name" defaultValue={foodName}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                    email === user?.email ?
+                        <div>
+                            <h2 className="text-center font-bold text-3xl text-white py-10">You can not purchase your own added food</h2>
+                        </div> :
+                        <div className="hero-content flex-col lg:flex-row-reverse">
+                            <div className="card flex-shrink-0 w-full max-w-4xl shadow-2xl bg-base-100">
+                                <h2 className="text-4xl text-black text-center pt-4 pb-1 font-semibold">Purchase Food</h2>
+                                <form onSubmit={handlePurchasedFood} className="card-body bg-white rounded-lg">
+                                    <div className="flex gap-5 items-center">
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Food Name</span>
+                                            </label>
+                                            <input type="text" name="foodName" placeholder="Food Name" defaultValue={foodName}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Food Photo</span>
+                                            </label>
+                                            <input type="text" name="image" placeholder="Food Name" defaultValue={image}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
                                     </div>
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Food Photo</span>
-                                        </label>
-                                        <input type="text" name="image" placeholder="Food Name" defaultValue={image}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                    <div className="flex gap-5 items-center">
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Price</span>
+                                            </label>
+                                            <input type="number" name="price" placeholder="Price"
+                                                defaultValue={price}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Quantity</span>
+                                            </label>
+                                            <input type="number" name="quantity" placeholder="Quantity"
+                                                defaultValue={1}
+                                                min={1} max={quantity}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex gap-5 items-center">
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Price</span>
-                                        </label>
-                                        <input type="number" name="price" placeholder="Price"
-                                            defaultValue={price}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                    <div className="flex gap-5 items-center">
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Buying Date</span>
+                                            </label>
+                                            <input type="text" name="orderedTime" placeholder="Buying Date"
+                                                defaultValue={orderedTime}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Food Category</span>
+                                            </label>
+                                            <input type="text" name="category" placeholder="Food Category"
+                                                defaultValue={category}
+                                                className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
                                     </div>
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Quantity</span>
-                                        </label>
-                                        <input type="number" name="quantity" placeholder="Quantity"
-                                            defaultValue={1}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                    <div className="flex gap-5 items-center">
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Buyer Name</span>
+                                            </label>
+                                            <input type="text" name="name" placeholder="Added By(Name)" defaultValue={user?.displayName} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Buyer Email</span>
+                                            </label>
+                                            <input type="email" name="email" placeholder="email" defaultValue={user?.email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex gap-5 items-center">
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Buying Date</span>
-                                        </label>
-                                        <input type="text" name="orderedTime" placeholder="Buying Date"
-                                            defaultValue={orderedTime}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                    <div className="flex gap-5 items-center">
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Added By (Name)</span>
+                                            </label>
+                                            <input type="text" name="name" placeholder="Added By(Name)" defaultValue={name} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
+                                        <div className="form-control flex-1">
+                                            <label className="label">
+                                                <span className="label-text text-black font-medium">Added By (Email)</span>
+                                            </label>
+                                            <input type="email" name="email" placeholder="email" defaultValue={email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                        </div>
                                     </div>
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Food Category</span>
-                                        </label>
-                                        <input type="text" name="category" placeholder="Food Category"
-                                            defaultValue={category}
-                                            className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                                    <div className="form-control mt-6">
+                                        <button className="btn btn-warning">Purchase Food</button>
                                     </div>
-                                </div>
-                                <div className="flex gap-5 items-center">
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Buyer Name</span>
-                                        </label>
-                                        <input type="text" name="name" placeholder="Added By(Name)" defaultValue={user?.displayName} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
-                                    </div>
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Buyer Email</span>
-                                        </label>
-                                        <input type="email" name="email" placeholder="email" defaultValue={user?.email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
-                                    </div>
-                                </div>
-                                <div className="flex gap-5 items-center">
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Added By (Name)</span>
-                                        </label>
-                                        <input type="text" name="name" placeholder="Added By(Name)" defaultValue={name} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
-                                    </div>
-                                    <div className="form-control flex-1">
-                                        <label className="label">
-                                            <span className="label-text text-black font-medium">Added By (Email)</span>
-                                        </label>
-                                        <input type="email" name="email" placeholder="email" defaultValue={email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
-                                    </div>
-                                </div>
-                                <div className="form-control mt-6">
-                                    <button className="btn btn-warning">Purchase Food</button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
-                    </div>
+
             }
 
 
