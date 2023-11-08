@@ -17,7 +17,7 @@ const MyOrderedFood = ({ myOrder, setMyOrder, myOrders }) => {
 
 
     const handleRemove = (id) => {
-        fetch(`http://localhost:5000/purchase/${_id}`, {
+        fetch(`assignment-11-server-eight-iota.vercel.app/purchase/${_id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())

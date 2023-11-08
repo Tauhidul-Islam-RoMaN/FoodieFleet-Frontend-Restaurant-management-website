@@ -31,7 +31,7 @@ const FoodPurchasePage = () => {
         console.log(purchasedFood);
 
 
-        fetch("http://localhost:5000/purchase", {
+        fetch("assignment-11-server-eight-iota.vercel.app/purchase", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

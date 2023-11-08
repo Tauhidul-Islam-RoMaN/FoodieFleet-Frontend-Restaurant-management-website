@@ -24,19 +24,19 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>,
-                loader: () => fetch('http://localhost:5000/allFood')
+                loader: () => fetch('assignment-11-server-eight-iota.vercel.app/allFood')
 
             },
             {
                 path:'/allFood',
                 element:<AllFood></AllFood>,
-                // loader: () => fetch('http://localhost:5000/allFood')
+                // loader: () => fetch('assignment-11-server-eight-iota.vercel.app/allFood')
 
             },
             {
                 path:'/allFood/:id',
                 element:<PrivateRoute><SingleFoodCard></SingleFoodCard></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
+                loader: ({params}) => fetch(`assignment-11-server-eight-iota.vercel.app/allFood/${params.id}`)
 
             },
             {
@@ -54,7 +54,7 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/addedFood',
                 element:<PrivateRoute><MyAddedFood></MyAddedFood></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/allFood')
+                loader: () => fetch('assignment-11-server-eight-iota.vercel.app/allFood')
 
             },
             {
@@ -64,17 +64,17 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/purchase/:id',
                 element:<PrivateRoute><FoodPurchasePage></FoodPurchasePage></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
+                loader: ({params}) => fetch(`assignment-11-server-eight-iota.vercel.app/allFood/${params.id}`)
             },
             {
                 path:'/orderedFood',
                 element:<PrivateRoute><AllOrder></AllOrder></PrivateRoute>,
-                loader: () => fetch('http://localhost:5000/purchase')  
+                loader: () => fetch('assignment-11-server-eight-iota.vercel.app/purchase')  
             },
             {
                 path:'/updateFood/:id',
                 element:<UpdateAFood></UpdateAFood>,
-                loader: ({params}) => fetch(`http://localhost:5000/allFood/${params.id}`)
+                loader: ({params}) => fetch(`assignment-11-server-eight-iota.vercel.app/allFood/${params.id}`)
             },
 
         ]
