@@ -74,7 +74,7 @@ const FoodPurchasePage = () => {
             {
                 quantity == 0 ?
                     <div>
-                        <h2 className="text-center font-bold text-3xl text-white py-10">You can not purchase your own added food</h2>
+                        <h2 className="text-center font-bold text-3xl text-white py-10">You can not purchase food with zero amount</h2>
                     </div> :
                     email === user?.email ?
                         <div>
