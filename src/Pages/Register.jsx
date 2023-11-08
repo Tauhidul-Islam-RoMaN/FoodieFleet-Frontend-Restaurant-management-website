@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+// import Swal from "sweetalert2";
 import useAuth from "../Hook/useAuth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -67,7 +67,7 @@ const Register = () => {
                 profileUpdate(name, photo)
                     .then(res => {
                         console.log(res.user);
-                        // setSuccessMessage("User updated successfully")
+                        setSuccessMessage("User updated successfully")
                         return
                     })
                     .catch(error => {
@@ -78,12 +78,12 @@ const Register = () => {
                 logOut()
                     .then(res => res.user)
                     .catch(error => console.error(error))
-                setSuccessMessage(
-                    Swal.fire(
-                        'Good job!',
-                        'User Created successfully!',
-                        'success'
-                    ))
+                // setSuccessMessage(
+                //     Swal.fire(
+                //         'Good job!',
+                //         'User Created successfully!',
+                //         'success'
+                //     ))
                 navigate('/login')
                 return
             })

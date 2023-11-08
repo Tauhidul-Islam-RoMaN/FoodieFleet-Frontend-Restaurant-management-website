@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useAuth from "../Hook/useAuth";
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -13,21 +13,19 @@ const Login = () => {
     const [successMessage, setSuccessMessage] = useState()
     const location = useLocation()
     const navigate = useNavigate()
-    console.log(location);
 
 
     const handleGoogleLogin = () => {
         googleLogin()
             .then(res => {
                 console.log(res.user)
-                setSuccessMessage(
-                    Swal.fire(
-                        'Good job!',
-                        'Google Login Successful !',
-                        'success'
-                    ))
+                // setSuccessMessage(
+                //     Swal.fire(
+                //         'Good job!',
+                //         'Google Login Successful !',
+                //         'success'
+                //     ))
                 navigate(location?.state ? location?.state : '/')
-                return
             })
             .catch(err => console.error(err))
 
@@ -47,12 +45,12 @@ const Login = () => {
         login(email, password)
             .then(res => {
                 console.log(res.user)
-                setSuccessMessage(
-                    Swal.fire(
-                        'Good job!',
-                        'Login Successful !',
-                        'success'
-                    ))
+                // setSuccessMessage(
+                //     Swal.fire(
+                //         'Good job!',
+                //         'Login Successful !',
+                //         'success'
+                //     ))
                 navigate(location?.state ? location?.state : '/')
                 // window.location.reload();
                 return

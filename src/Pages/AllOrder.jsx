@@ -17,24 +17,30 @@ const AllOrder = () => {
 
     }, [allOrders, user?.email])
     // console.log(Array.isArray(myOrders));
-    
+
 
     return (
-        // {
-        //     myOrders.length == 0 ?
-        //         <div className="text-center font-semibold text-3xl"> <p>No Item found</p> </div> :
 
-                <div className=" bg-[#000B33]">
-                    <div className="max-w-7xl mx-4 lg:mx-24">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10">
-                            {
-                                myOrders?.map(myOrder => <MyOrderedFood
-                                    key={myOrder._id} myOrder={myOrder} setMyOrder={setMyOrder} myOrders={myOrders}> </MyOrderedFood>)
-                            }
-                        </div>
-                    </div>
-                </div>
-        // }
+
+        <div className=" bg-[#000B33]">
+            <div className="max-w-7xl mx-4 lg:mx-24">
+               {
+                 myOrders.length == 0 ?
+                 <div>
+                     <h2 className="text-center font-bold text-3xl text-white py-10">You have not Ordered any food Yet</h2>
+                 </div> :
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10">
+                     {
+                         myOrders?.map(myOrder => <MyOrderedFood
+                             key={myOrder._id}
+                             myOrder={myOrder}
+                             setMyOrder={setMyOrder}
+                             myOrders={myOrders}> </MyOrderedFood>)
+                     }
+                 </div>
+               }
+            </div>
+        </div>
     );
 };
 

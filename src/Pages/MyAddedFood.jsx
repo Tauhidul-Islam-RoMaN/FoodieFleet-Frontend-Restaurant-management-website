@@ -19,14 +19,20 @@ const MyAddedFood = () => {
                     FoodieFleet | MyAddedFood
                 </title>
             </Helmet>
-            <div className="max-w-7xl mx-4 lg:mx-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-                    {
-                        myAddedFoods?.map(myAddedFood => <MyAddedFoodCard
-                            key={myAddedFood._id} myAddedFood={myAddedFood}> </MyAddedFoodCard>)
-                    }
-                </div>
-            </div>
+            {
+                myAddedFoods.length == 0 ?
+                    <div>
+                        <h2 className="text-center font-bold text-3xl text-white py-10">You have not added any food Yet</h2>
+                    </div> :
+                    <div className="max-w-7xl mx-4 lg:mx-24">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
+                            {
+                                myAddedFoods?.map(myAddedFood => <MyAddedFoodCard
+                                    key={myAddedFood._id} myAddedFood={myAddedFood}> </MyAddedFoodCard>)
+                            }
+                        </div>
+                    </div>
+            }
         </div>
     );
 };
