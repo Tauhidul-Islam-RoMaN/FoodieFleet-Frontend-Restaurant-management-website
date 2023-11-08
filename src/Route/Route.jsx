@@ -30,7 +30,7 @@ const myCreatedRoute = createBrowserRouter([
             {
                 path:'/allFood',
                 element:<AllFood></AllFood>,
-                loader: () => fetch('http://localhost:5000/allFood')
+                // loader: () => fetch('http://localhost:5000/allFood')
 
             },
             {

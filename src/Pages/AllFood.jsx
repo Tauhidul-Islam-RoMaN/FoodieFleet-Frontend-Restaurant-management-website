@@ -1,33 +1,59 @@
-import { useLoaderData } from "react-router-dom";
 import AllFoodCard from "./AllFoodCard";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 
 const AllFood = () => {
-    const allFoods = useLoaderData()
-    console.log(allFoods);
+    // const allFoods = useLoaderData()
+    // console.log(allFoods);
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [searchResults, setSearchResults] = useState([]);
-    console.log(searchResults);
+    const [allFoods,setAllFoods] = useState([])
+    const [search, setSearch] = useState("");
+    const [count, setCount] = useState("");
+    const [itemsPerPage, setItemsPerPage] = useState(9);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        if (searchQuery) {
+        fetch(`http://localhost:5000/allFood?page=${currentPage}&size=${itemsPerPage}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data);
+            setAllFoods(data)
+        })
+    },[currentPage,itemsPerPage])
 
-            fetch(`http://localhost:5000/allFood?foodName=${searchQuery}`)
-                .then((response) => response.json())
-                .then((data) => setSearchResults(data))
-                .catch((error) => console.error(error));
-        } else {
-            setSearchResults([]); // Reset search results when the query is empty
+    useEffect(() => {
+        fetch('http://localhost:5000/foodCount')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setCount(data.count)
+            })
+    }, [])
+    const numberOfPages = Math.ceil(count / itemsPerPage)
+    console.log(count);
+    const pages = [...Array(numberOfPages).keys()];
+    console.log(pages);
+
+    const handleItemsPerPage = e => {
+        const foodPerPage = parseInt(e.target.value);
+        console.log(foodPerPage);
+        setItemsPerPage(foodPerPage);
+        setCurrentPage(1);
+    }
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
         }
-    }, [searchQuery]);
+    }
 
-    // const handleSearch = (e) => {
-    //     e.preventDefault()
-    //     const search = e.target.search.value
-    //     console.log(search);
-    // }
+    const handleNextPage = () => {
+        if (currentPage < pages.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    }
+
+
 
     return (
         <div className="bg-[#000B33]">
@@ -41,33 +67,49 @@ const AllFood = () => {
                     <div className="form-control">
                         <input type="text"
                             name="search"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search By Food Name"
                             className="input input-bordered max-w-md" />
                     </div>
-                    {/* <div className="form-control">
+                    <div className="form-control">
                         <button className="btn btn-warning">Search</button>
-                    </div> */}
+                    </div>
                 </div>
                 <div>
-                    {searchResults.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-                            {
-                                searchResults.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
-                            }
-                        </div>
-
-                    ) : searchQuery ? (
-                        <p className="text-center flex justify-center items-center text-3xl">No data found</p>
-                    ) :
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
-                            {
-                                allFoods.map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
-                            }
-                        </div>
-                    }
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">
+                        {
+                            allFoods.filter((food) => {
+                                return search.toLowerCase() === "" ? food : food.foodName.toLowerCase().includes(search)
+                            }).map(food => <AllFoodCard key={food._id} food={food}></AllFoodCard>)
+                        }
+                    </div>
                 </div>
+                <p>ccc  {currentPage} </p>
+
+                <h3 className="text-center flex items-center pb-10 justify-center text-white gap-5 font-semibold text-xl">
+                    <button className="btn btn-sm" onClick={handlePrevPage}>Prev</button>
+                    {
+                        pages.map(page => <button
+                            className={currentPage === page + 1 ?
+                                "btn btn-sm btn-warning" : "btn btn-sm"}
+                            key={page+1}
+                            onClick={() => setCurrentPage(page + 1)}
+                        >{page + 1}
+
+                        </button>)
+                    }
+                    <button className="btn btn-sm" onClick={handleNextPage}>Next</button>
+                    <select value={itemsPerPage} className="bg-[#000B33]" onChange={handleItemsPerPage} name="" id="">
+                        <option value="3">3</option>
+                        <option value="5">5</option>
+                        <option value="9" defaultValue={9}>9</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="30">50</option>
+                        <option value="30">100</option>
+                    </select>
+                </h3>
             </div>
         </div>
     );
