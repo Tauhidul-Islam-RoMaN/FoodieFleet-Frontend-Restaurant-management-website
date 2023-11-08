@@ -48,6 +48,18 @@ const Register = () => {
                 console.log(data);
             });
 
+        // fetch("http://localhost:5000/jwt", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify(newUser),
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         console.log(data);
+        //     });
+
 
         createUser(email, password)
             .then(res => {

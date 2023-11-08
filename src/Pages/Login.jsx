@@ -54,6 +54,7 @@ const Login = () => {
                         'success'
                     ))
                 navigate(location?.state ? location?.state : '/')
+                // window.location.reload();
                 return
 
 

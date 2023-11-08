@@ -71,9 +71,6 @@ const AllFood = () => {
                             placeholder="Search By Food Name"
                             className="input input-bordered max-w-md" />
                     </div>
-                    <div className="form-control">
-                        <button className="btn btn-warning">Search</button>
-                    </div>
                 </div>
                 <div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 py-10">

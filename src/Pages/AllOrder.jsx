@@ -15,19 +15,26 @@ const AllOrder = () => {
         const Orders = allOrders.filter(order => order.buyerEmail === user?.email)
         setMyOrder(Orders)
 
-    },[allOrders,user?.email])
+    }, [allOrders, user?.email])
+    // console.log(Array.isArray(myOrders));
+    
 
     return (
-        <div className=" bg-[#000B33]">
-            <div className="max-w-7xl mx-4 lg:mx-24">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10">
-                    {
-                        myOrders?.map(myOrder => <MyOrderedFood
-                            key={myOrder._id} myOrder={myOrder} setMyOrder={setMyOrder} myOrders={myOrders}> </MyOrderedFood>)
-                    }
+        // {
+        //     myOrders.length == 0 ?
+        //         <div className="text-center font-semibold text-3xl"> <p>No Item found</p> </div> :
+
+                <div className=" bg-[#000B33]">
+                    <div className="max-w-7xl mx-4 lg:mx-24">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 py-10">
+                            {
+                                myOrders?.map(myOrder => <MyOrderedFood
+                                    key={myOrder._id} myOrder={myOrder} setMyOrder={setMyOrder} myOrders={myOrders}> </MyOrderedFood>)
+                            }
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+        // }
     );
 };
 
