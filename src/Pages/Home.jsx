@@ -12,7 +12,7 @@ const Home = () => {
     const [chefs, setChefs] = useState()
 
     console.log(allFoods);
-    const sortedFood = [...allFoods].sort((a, b) => b.quantity - a.quantity);
+    const sortedFood = [...allFoods].sort((a, b) => b.sell - a.sell);
     console.log(sortedFood);
     const slicedFood = sortedFood.slice(0, 6)
     console.log(slicedFood);

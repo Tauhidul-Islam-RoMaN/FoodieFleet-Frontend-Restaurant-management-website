@@ -15,14 +15,13 @@ const AddAFood = () => {
         const foodName = form.foodName.value
         const image = form.image.value
         const category = form.category.value
-        // const category1 = category
-        const quantity = form.quantity.value
+        const quantity = parseInt(form.quantity.value)
+        const sell = parseInt(form.sell.value)
         const origin = form.origin.value
-        // const origin = country
-        const price = form.price.value
+        const price = parseInt(form.price.value).toFixed(2)
         const description = form.description.value
 
-        const newFood = { email, name, foodName, image, category, quantity, origin, price, description };
+        const newFood = { email, name, foodName,sell, image, category, quantity, origin, price, description };
         console.log(newFood);
 
 
@@ -127,6 +126,14 @@ const AddAFood = () => {
                                     <span className="label-text text-black font-medium">Added By(Email)</span>
                                 </label>
                                 <input type="email" name="email" placeholder="email" defaultValue={user?.email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
+                            </div>
+                        </div>
+                        <div className="flex gap-5 items-center">
+                            <div className="form-control flex-1">
+                                <label className="label">
+                                    <span className="label-text text-black font-medium">Number of sell</span>
+                                </label>
+                                <input type="number" min={0} name="sell" placeholder="Number of sell" defaultValue={0} className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                             </div>
                         </div>
                         <div className="flex gap-5 items-center">
