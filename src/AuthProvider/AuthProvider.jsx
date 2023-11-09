@@ -60,7 +60,7 @@ const AuthProvider = ({children}) => {
             //             console.log( 'token response', res.data);
             //         })
             // }
-            // fetch("assignment-11-server-eight-iota.vercel.app/jwt", {
+            // fetch("https://assignment-11-server-eight-iota.vercel.app/jwt", {
             //         method: "POST",
             //         headers: {
             //             "Content-Type": "application/json",
