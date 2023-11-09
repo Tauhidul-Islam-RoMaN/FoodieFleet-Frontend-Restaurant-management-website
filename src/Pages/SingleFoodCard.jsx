@@ -19,7 +19,7 @@ const SingleFoodCard = () => {
 
 
     const handleOrder = () => {
-        fetch("https://assignment-11-server-eight-iota.vercel.app/order", {
+        fetch("http://localhost:5000/order", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

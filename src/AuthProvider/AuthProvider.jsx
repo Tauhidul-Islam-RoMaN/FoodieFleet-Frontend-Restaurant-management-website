@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
-// import axios from "axios";
+import axios from "axios";
 
 
 export const MyCreatedAuth = createContext()
@@ -41,26 +41,26 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
-            setUser(user)
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
             setLoading(false)
-            // const userEmail = user?.email;
-            // const loggedUser = {email : userEmail};
-            // if (user) {
-            //     axios.post('http://localhost:5173/jwt', loggedUser, {
-            //         withCredentials:true })
-            //         .then (res=> {
-            //             console.log( 'token response', res.data);
-            //         })
-            // }
-            // else{
-            //     axios.post('http://localhost:5173/logout', loggedUser, {
-            //         withCredentials:true })
-            //         .then (res=> {
-            //             console.log( 'token response', res.data);
-            //         })
-            // }
-            // fetch("https://assignment-11-server-eight-iota.vercel.app/jwt", {
+            const userEmail = currentUser.email || user?.email;
+            const loggedUser = {email : userEmail};
+            if (currentUser) {
+                axios.post('http://localhost:5000/jwt', loggedUser, {
+                    withCredentials:true })
+                    .then (res=> {
+                        console.log( 'token response', res.data);
+                    })
+            }
+            else{
+                axios.post('http://localhost:5000/logout', loggedUser, {
+                    withCredentials:true })
+                    .then (res=> {
+                        console.log( 'token response', res.data);
+                    })
+            }
+            // fetch("http://localhost:5000/jwt", {
             //         method: "POST",
             //         headers: {
             //             "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const AuthProvider = ({children}) => {
         })
         
         return () => unsubscribe()
-    },[])
+    },[user?.email])
 
 
     const authInfo = {
