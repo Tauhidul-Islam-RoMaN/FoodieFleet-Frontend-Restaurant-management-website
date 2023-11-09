@@ -47,20 +47,20 @@ const AuthProvider = ({children}) => {
             const userEmail = currentUser.email || user?.email;
             const loggedUser = {email : userEmail};
             if (currentUser) {
-                axios.post('http://localhost:5000/jwt', loggedUser, {
+                axios.post('assignment-11-server-eight-iota.vercel.app/jwt', loggedUser, {
                     withCredentials:true })
                     .then (res=> {
                         console.log( 'token response', res.data);
                     })
             }
             else{
-                axios.post('http://localhost:5000/logout', loggedUser, {
+                axios.post('assignment-11-server-eight-iota.vercel.app/logout', loggedUser, {
                     withCredentials:true })
                     .then (res=> {
                         console.log( 'token response', res.data);
                     })
             }
-            // fetch("http://localhost:5000/jwt", {
+            // fetch("assignment-11-server-eight-iota.vercel.app/jwt", {
             //         method: "POST",
             //         headers: {
             //             "Content-Type": "application/json",
