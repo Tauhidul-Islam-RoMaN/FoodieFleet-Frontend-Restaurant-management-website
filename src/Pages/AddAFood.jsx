@@ -25,7 +25,7 @@ const AddAFood = () => {
         console.log(newFood);
 
 
-        fetch("http://localhost:5000/allFood", {
+        fetch("assignment-11-server-eight-iota.vercel.app/allFood", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
