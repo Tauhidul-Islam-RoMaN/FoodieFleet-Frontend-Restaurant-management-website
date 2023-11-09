@@ -89,14 +89,14 @@ const FoodPurchasePage = () => {
                                             <label className="label">
                                                 <span className="label-text text-black font-medium">Food Name</span>
                                             </label>
-                                            <input type="text" name="foodName" placeholder="Food Name" defaultValue={foodName}
+                                            <input type="text" name="foodName" readOnly placeholder="Food Name" defaultValue={foodName}
                                                 className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
                                         <div className="form-control flex-1">
                                             <label className="label">
                                                 <span className="label-text text-black font-medium">Food Photo</span>
                                             </label>
-                                            <input type="text" name="image" placeholder="Food Name" defaultValue={image}
+                                            <input type="text" name="image" readOnly placeholder="Food Name" defaultValue={image}
                                                 className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@ const FoodPurchasePage = () => {
                                             <label className="label">
                                                 <span className="label-text text-black font-medium">Price</span>
                                             </label>
-                                            <input type="number" name="price" placeholder="Price"
+                                            <input type="number" name="price" readOnly placeholder="Price"
                                                 defaultValue={price}
                                                 className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
@@ -122,7 +122,7 @@ const FoodPurchasePage = () => {
                                     <div className="flex gap-5 items-center">
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text text-black font-medium">Buying Date</span>
+                                                <span className="label-text readOnly text-black font-medium">Buying Date</span>
                                             </label>
                                             <input type="text" name="orderedTime" placeholder="Buying Date"
                                                 defaultValue={orderedTime}
@@ -130,7 +130,7 @@ const FoodPurchasePage = () => {
                                         </div>
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text text-black font-medium">Food Category</span>
+                                                <span className="label-text readOnly text-black font-medium">Food Category</span>
                                             </label>
                                             <input type="text" name="category" placeholder="Food Category"
                                                 defaultValue={category}
@@ -140,13 +140,13 @@ const FoodPurchasePage = () => {
                                     <div className="flex gap-5 items-center">
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text text-black font-medium">Buyer Name</span>
+                                                <span className="label-text readOnly text-black font-medium">Buyer Name</span>
                                             </label>
                                             <input type="text" name="name" placeholder="Added By(Name)" defaultValue={user?.displayName} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text text-black font-medium">Buyer Email</span>
+                                                <span className="label-text readOnly text-black font-medium">Buyer Email</span>
                                             </label>
                                             <input type="email" name="email" placeholder="email" defaultValue={user?.email} readOnly className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
