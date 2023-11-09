@@ -122,17 +122,17 @@ const FoodPurchasePage = () => {
                                     <div className="flex gap-5 items-center">
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text readOnly text-black font-medium">Buying Date</span>
+                                                <span className="label-text  text-black font-medium">Buying Date</span>
                                             </label>
-                                            <input type="text" name="orderedTime" placeholder="Buying Date"
+                                            <input type="text" name="orderedTime" readOnly placeholder="Buying Date"
                                                 defaultValue={orderedTime}
                                                 className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
                                         <div className="form-control flex-1">
                                             <label className="label">
-                                                <span className="label-text readOnly text-black font-medium">Food Category</span>
+                                                <span className="label-text  text-black font-medium">Food Category</span>
                                             </label>
-                                            <input type="text" name="category" placeholder="Food Category"
+                                            <input type="text" name="category" readOnly placeholder="Food Category"
                                                 defaultValue={category}
                                                 className="p-3 w-full text-sm rounded-md bg-[#000B33] text-white focus:border-white focus:outline-none" required />
                                         </div>
