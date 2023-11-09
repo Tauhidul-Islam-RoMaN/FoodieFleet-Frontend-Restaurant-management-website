@@ -13,7 +13,7 @@ const AllFood = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        fetch(`assignment-11-server-eight-iota.vercel.app/allFood?page=${currentPage}&size=${itemsPerPage}`)
+        fetch(`https://assignment-11-server-eight-iota.vercel.app/allFood?page=${currentPage}&size=${itemsPerPage}`)
 
         .then(res => res.json())
         .then(data => {
@@ -23,7 +23,7 @@ const AllFood = () => {
     },[currentPage,itemsPerPage])
 
     useEffect(() => {
-        fetch('assignment-11-server-eight-iota.vercel.app/foodCount')
+        fetch('https://assignment-11-server-eight-iota.vercel.app/foodCount')
             .then(res => res.json())
             .then(data => {
                 console.log(data);

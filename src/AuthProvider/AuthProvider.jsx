@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
-import axios from "axios";
+// import axios from "axios";
 
 
 export const MyCreatedAuth = createContext()
@@ -41,26 +41,26 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setUser(user)
             setLoading(false)
-            const userEmail = currentUser?.email || user?.email;
-            const loggedUser = {email : userEmail};
-            if (currentUser) {
-                axios.post('assignment-11-server-eight-iota.vercel.app/jwt', loggedUser, {
-                    withCredentials:true })
-                    .then (res=> {
-                        console.log( 'token response', res.data);
-                    })
-            }
-            else{
-                axios.post('assignment-11-server-eight-iota.vercel.app/logout', loggedUser, {
-                    withCredentials:true })
-                    .then (res=> {
-                        console.log( 'token response', res.data);
-                    })
-            }
-            // fetch("assignment-11-server-eight-iota.vercel.app/jwt", {
+            // const userEmail = user?.email;
+            // const loggedUser = {email : userEmail};
+            // if (user) {
+            //     axios.post('https://assignment-11-server-eight-iota.vercel.app/jwt', loggedUser, {
+            //         withCredentials:true })
+            //         .then (res=> {
+            //             console.log( 'token response', res.data);
+            //         })
+            // }
+            // else{
+            //     axios.post('https://assignment-11-server-eight-iota.vercel.app/logout', loggedUser, {
+            //         withCredentials:true })
+            //         .then (res=> {
+            //             console.log( 'token response', res.data);
+            //         })
+            // }
+            // fetch("https://assignment-11-server-eight-iota.vercel.app/jwt", {
             //         method: "POST",
             //         headers: {
             //             "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const AuthProvider = ({children}) => {
         })
         
         return () => unsubscribe()
-    },[user?.email])
+    },[])
 
 
     const authInfo = {
