@@ -30,7 +30,7 @@ const UpdateAFood = () => {
         console.log(updatedFood);
         
 
-        fetch(`https://assignment-11-server-eight-iota.vercel.app/update/${id}`, {
+        fetch(`http://localhost:5000/update/${id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json"

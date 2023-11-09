@@ -36,7 +36,7 @@ const Register = () => {
             return setErrorMessage("Provide at least one Special Character")
         }
 
-        fetch("https://assignment-11-server-eight-iota.vercel.app/users", {
+        fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -48,7 +48,7 @@ const Register = () => {
                 console.log(data);
             });
 
-        // fetch("https://assignment-11-server-eight-iota.vercel.app/jwt", {
+        // fetch("http://localhost:5000/jwt", {
         //     method: "POST",
         //     headers: {
         //         "Content-Type": "application/json",
